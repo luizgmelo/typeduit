@@ -9,3 +9,5 @@ export const registerSchema = yup.object({
     password: passwordSchema, 
   })
 })
+
+export type RegisterPayload = yup.InferType<typeof registerSchema>
