@@ -7,3 +7,5 @@ export const loginSchema = yup.object({
     password: passwordSchema, 
   })
 })
+
+export type LoginPayload = yup.InferType<typeof loginSchema>
