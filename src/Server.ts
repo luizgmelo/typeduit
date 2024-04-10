@@ -2,6 +2,7 @@ import * as http from 'http';
 import App from "./App";
 import { publicRoutes } from './Routes/PublicRoutes';
 import { users } from './Routes/Users';
+import { user } from './Routes/User';
 
 const GRACEFUL_SHUTDOWN_TIME = 100 * 1000; // 100 seconds
 
@@ -55,6 +56,7 @@ export class Server {
   private registerRouter(): void {
     this.application.app.use('/', publicRoutes);
     this.application.app.use('/users', users);
+    this.application.app.use('/user', user);
   }
 
   private processSignal(): void {

@@ -12,11 +12,6 @@ const users = express.Router();
 users.use(bodyParser.json());
 users.use(bodyParser.urlencoded({ extended: true }));
 
-users.get('/auth', authMiddleware, (req: Request, res: Response) => {
-  res.json(req.userInfo)
-  // res.send({ status: 200, message: "Login Successfully"})
-})
-
 // login
 users.post('/login', (req: Request, res: Response, next: NextFunction) => {
   return loginController.handle(req, res, next);
