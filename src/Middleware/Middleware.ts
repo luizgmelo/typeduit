@@ -10,14 +10,16 @@ export const authMiddleware = function(req: Request, res: Response, next: NextFu
   if (typeof bearerHeader !== 'undefined') {
     const bearer = bearerHeader.split(' ');
     const bearerToken = bearer[1];
-    console.log(bearerToken)
-    jwt.verify(bearerToken, privateKey, { algorithms: [algorithm] }, (err, userInfo) => {
+
+    jwt.verify(bearerToken, privateKey, { algorithms: [algorithm] }, (err, userData) => {
       if (err) {
         console.log(err);
         res.send(403).end();
         return;
       }
-      req.userInfo = userInfo;
+      req.headers["Typeduit-Subject"] = userData["subject"];
+      req.headers["Typeduit-Client-Email"] = userData["email"];
+      req.headers["Typeduit-Client-Token"] = bearerToken;
       next();
     });
   } else {
